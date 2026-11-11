@@ -1,0 +1,213 @@
+/* ============================================================
+   1. GLOBAL RESET & DESIGN TOKENS (CSS VARIABLES)
+   ============================================================ */
+
+/* CSS Variables allow us to define our color palette in one place 
+   and reuse it throughout our stylesheet. */
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f0f14 0%, #1a1a24 100%);
+  --calc-bg: #17181f;
+  --calc-border: rgba(255, 255, 255, 0.08);
+  --calc-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 0, 0, 0.35);
+
+  /* iOS-inspired Button Colors */
+  --btn-num-bg: #2a2c38;
+  --btn-num-hover: #373a4a;
+  --btn-num-active: #474b5f;
+  --btn-num-text: #ffffff;
+
+  --btn-func-bg: #3e4253;
+  --btn-func-hover: #4d5267;
+  --btn-func-active: #5f657e;
+  --btn-func-text: #e2e8f0;
+
+  --btn-op-bg: #ff9f0a;
+  --btn-op-hover: #ffad33;
+  --btn-op-active: #e08b08;
+  --btn-op-text: #ffffff;
+
+  --display-text: #ffffff;
+  --display-secondary: #94a3b8;
+}
+
+/* Box-sizing border-box ensures padding & border do not affect element's total width */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none; /* Prevents text selection when tapping buttons rapidly */
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-gradient);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  padding: 1rem;
+}
+
+/* ============================================================
+   2. CALCULATOR SHELL
+   ============================================================ */
+
+.calculator {
+  width: 100%;
+  max-width: 340px;
+  background-color: var(--calc-bg);
+  border-radius: 32px;
+  border: 1px solid var(--calc-border);
+  box-shadow: var(--calc-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  backdrop-filter: blur(20px);
+}
+
+/* ============================================================
+   3. SCREEN DISPLAY (FLEXBOX)
+   ============================================================ */
+
+.display {
+  background: transparent;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 10px 8px;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+/* Small secondary text showing previous operand and operator */
+.previous-operand {
+  color: var(--display-secondary);
+  font-size: 1.1rem;
+  min-height: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* Large primary text showing current number or answer */
+.current-operand {
+  color: var(--display-text);
+  font-size: 2.8rem;
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  transition: font-size 0.15s ease;
+}
+
+/* ============================================================
+   4. KEYPAD (CSS GRID LAYOUT)
+   ============================================================ */
+
+/* CSS Grid creates a strict 4-column layout with consistent spacing */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Base button styles */
+.btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  height: 64px;
+  border-radius: 50px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.15s ease, transform 0.08s ease, filter 0.15s ease;
+}
+
+/* Active "press down" effect for all buttons */
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* Number Buttons (0-9 and decimal) */
+.btn-number {
+  background-color: var(--btn-num-bg);
+  color: var(--btn-num-text);
+}
+
+.btn-number:hover {
+  background-color: var(--btn-num-hover);
+}
+
+.btn-number:active {
+  background-color: var(--btn-num-active);
+}
+
+/* Function Buttons (AC, +/-, %) */
+.btn-function {
+  background-color: var(--btn-func-bg);
+  color: var(--btn-func-text);
+  font-size: 1.25rem;
+}
+
+.btn-function:hover {
+  background-color: var(--btn-func-hover);
+}
+
+.btn-function:active {
+  background-color: var(--btn-func-active);
+}
+
+/* Operator Buttons (+, -, ×, ÷, =) */
+.btn-operator {
+  background-color: var(--btn-op-bg);
+  color: var(--btn-op-text);
+  font-size: 1.6rem;
+}
+
+.btn-operator:hover {
+  background-color: var(--btn-op-hover);
+}
+
+.btn-operator:active {
+  background-color: var(--btn-op-active);
+}
+
+/* 0 Button spans 2 columns to mimic the classic iOS wide layout */
+.btn-zero {
+  grid-column: span 2;
+  border-radius: 35px;
+  justify-content: flex-start;
+  padding-left: 26px;
+}
+
+/* Active operator indicator (optional visual cue when an operator is selected) */
+.btn-operator.is-active {
+  background-color: #ffffff;
+  color: var(--btn-op-bg);
+}
+
+/* ============================================================
+   5. RESPONSIVE DESIGN FOR SMALLER SCREENS
+   ============================================================ */
+@media (max-width: 360px) {
+  .calculator {
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .btn {
+    height: 56px;
+    font-size: 1.25rem;
+  }
+
+  .current-operand {
+    font-size: 2.3rem;
+  }
+}
+

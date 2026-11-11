@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist iOS Calculator</title>
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Main Calculator Card -->
+  <main class="calculator">
+
+    <!-- Display Screen Section -->
+    <section class="display" aria-live="polite">
+      <!-- Displays the previous number and chosen operator (e.g., "12 +") -->
+      <div class="previous-operand" id="previous-operand"></div>
+      <!-- Displays the active input or final result (e.g., "42") -->
+      <div class="current-operand" id="current-operand">0</div>
+    </section>
+
+    <!-- Keypad Buttons Section (Structured via CSS Grid) -->
+    <section class="keypad">
+      <!-- Row 1: Function Keys & Operator -->
+      <button type="button" class="btn btn-function" data-action="clear">AC</button>
+      <button type="button" class="btn btn-function" data-action="toggle-sign">+/-</button>
+      <button type="button" class="btn btn-function" data-action="percent">%</button>
+      <button type="button" class="btn btn-operator" data-action="operator" data-operator="÷">÷</button>
+
+      <!-- Row 2: Numbers 7, 8, 9 & Operator -->
+      <button type="button" class="btn btn-number" data-number="7">7</button>
+      <button type="button" class="btn btn-number" data-number="8">8</button>
+      <button type="button" class="btn btn-number" data-number="9">9</button>
+      <button type="button" class="btn btn-operator" data-action="operator" data-operator="×">×</button>
+
+      <!-- Row 3: Numbers 4, 5, 6 & Operator -->
+      <button type="button" class="btn btn-number" data-number="4">4</button>
+      <button type="button" class="btn btn-number" data-number="5">5</button>
+      <button type="button" class="btn btn-number" data-number="6">6</button>
+      <button type="button" class="btn btn-operator" data-action="operator" data-operator="-">−</button>
+
+      <!-- Row 4: Numbers 1, 2, 3 & Operator -->
+      <button type="button" class="btn btn-number" data-number="1">1</button>
+      <button type="button" class="btn btn-number" data-number="2">2</button>
+      <button type="button" class="btn btn-number" data-number="3">3</button>
+      <button type="button" class="btn btn-operator" data-action="operator" data-operator="+">+</button>
+
+      <!-- Row 5: 0 (spans 2 columns), Decimal, Equals -->
+      <button type="button" class="btn btn-number btn-zero" data-number="0">0</button>
+      <button type="button" class="btn btn-number" data-action="decimal">.</button>
+      <button type="button" class="btn btn-operator btn-equals" data-action="calculate">=</button>
+    </section>
+
+  </main>
+
+  <!-- Link to external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+
+</html>
